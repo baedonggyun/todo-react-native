@@ -1,18 +1,13 @@
-import React, {type PropsWithChildren} from 'react';
+import React from 'react';
+import {SafeAreaView, Text} from 'react-native';
+import {Header} from '../components/Header/Header';
+import {Styles} from './Styles';
 
 export const Main = () => {
   return (
-    <ScrollView
-      contentInsetAdjustmentBehavior="automatic"
-      style={backgroundStyle}>
+    <SafeAreaView style={Styles.main}>
       <Header />
-      <View
-        style={{
-          backgroundColor: isDarkMode ? Colors.black : Colors.white,
-        }}>
-        test
-        <LearnMoreLinks />
-      </View>
-    </ScrollView>
+      <Text>Hello World</Text>
+    </SafeAreaView>
   );
 };
