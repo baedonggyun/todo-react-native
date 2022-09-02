@@ -11,6 +11,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {Styles} from './Styles';
+import produce from 'immer';
 
 export const Main = () => {
   const [taskText, setTaskText] = useState<string>('');
