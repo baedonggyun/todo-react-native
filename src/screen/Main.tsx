@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {
+  Alert,
   FlatList,
   Image,
   SafeAreaView,
@@ -13,12 +14,30 @@ import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {Styles} from './Styles';
 import produce from 'immer';
 
+interface task {
+  idx: number;
+  text: string;
+}
+
 export const Main = () => {
   const [taskText, setTaskText] = useState<string>('');
   const [task, setTask] = useState<any>([]);
+  const [taskIdx, setTaskIdx] = useState(0);
+  const [taskList, setTaskList] = useState<task[]>([]);
 
   const addTaskButton = () => {
+    if (!taskText) {
+      Alert.alert('내용을 입력해주세요');
+      return;
+    }
+
     setTask(task.concat(taskText));
+    setTaskIdx(taskIdx + 1);
+    const newTask = {
+      idx: taskIdx,
+      text: taskText,
+    };
+    setTaskList(data => [...data, newTask]);
   };
 
   const removeTaskButton = (index: number) => {
