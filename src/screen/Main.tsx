@@ -91,7 +91,7 @@ export const Main = () => {
 
       <View style={Styles.containerTask}>
         <FlatList
-          data={task}
+          data={taskList}
           ListEmptyComponent={() => (
             <View style={Styles.containerEmpty}>
               <View style={Styles.empty}>
@@ -108,24 +108,20 @@ export const Main = () => {
               </View>
             </View>
           )}
-          renderItem={({item, index}) => (
+          renderItem={({item}) => (
             <View style={Styles.containerTask}>
               <View style={Styles.taskWrapper}>
                 <BouncyCheckbox
                   fillColor="#5E60CE"
                   style={Styles.taskCheckBox}
                 />
-                <Text
-                  style={[
-                    Styles.taskText,
-                    item.isCompleted && Styles.taskCompletedText,
-                  ]}>
-                  {index} {item}
+                <Text style={[Styles.taskText, Styles.taskCompletedText]}>
+                  {item.idx} {item.text}
                 </Text>
                 <TouchableOpacity
                   style={Styles.taskButton}
                   onPress={() => {
-                    removeTaskButton(index);
+                    removeTaskButton(item.idx);
                   }}>
                   <Icon
                     name="trash"
