@@ -17,6 +17,7 @@ import produce from 'immer';
 interface task {
   idx: number;
   text: string;
+  isCompleted: boolean;
 }
 
 export const Main = () => {
@@ -36,14 +37,18 @@ export const Main = () => {
     const newTask = {
       idx: taskIdx,
       text: taskText,
+      isCompleted: false,
     };
     setTaskList(data => [...data, newTask]);
   };
 
   const removeTaskButton = (index: number) => {
-    const data = [...task];
-    data.splice(index, 1);
-    setTask(data);
+    const data = [...taskList];
+    taskList.map(task => {
+      console.log(task);
+    });
+
+    //setTask(taskList => taskList.filter(item => item.idx !== index));
   };
 
   return (
@@ -115,7 +120,11 @@ export const Main = () => {
                   fillColor="#5E60CE"
                   style={Styles.taskCheckBox}
                 />
-                <Text style={[Styles.taskText, Styles.taskCompletedText]}>
+                <Text
+                  style={[
+                    Styles.taskText,
+                    item.isCompleted && Styles.taskCompletedText,
+                  ]}>
                   {item.idx} {item.text}
                 </Text>
                 <TouchableOpacity
