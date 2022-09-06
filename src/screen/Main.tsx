@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {Styles} from './Styles';
 import produce from 'immer';
+import {createIconSetFromFontello} from 'react-native-vector-icons';
 
 interface task {
   idx: number;
@@ -22,7 +23,6 @@ interface task {
 
 export const Main = () => {
   const [taskText, setTaskText] = useState<string>('');
-  const [task, setTask] = useState<any>([]);
   const [taskIdx, setTaskIdx] = useState(0);
   const [taskList, setTaskList] = useState<task[]>([]);
 
@@ -32,24 +32,44 @@ export const Main = () => {
       return;
     }
 
-    setTask(task.concat(taskText));
     setTaskIdx(taskIdx + 1);
     const newTask = {
       idx: taskIdx,
       text: taskText,
       isCompleted: false,
     };
-    setTaskList(data => [...data, newTask]);
+    setTaskList(data => [newTask, ...data]);
+    setTaskText('');
   };
 
-  const removeTaskButton = (index: number) => {
-    const data = [...taskList];
+  const removeTaskButton = (idx: number) => {
+    let data: task[] = [];
     taskList.map(task => {
-      console.log(task);
+      if (task.idx !== idx) {
+        data.push(task);
+      }
     });
 
-    //setTask(taskList => taskList.filter(item => item.idx !== index));
+    setTaskList(data);
   };
+
+  const completedCheck = (idx: number) => {
+    let data: task[] = [];
+    taskList.map(task => {
+      if (task.idx === idx) {
+        task.isCompleted = !task.isCompleted;
+      }
+      data.push(task);
+    });
+
+    setTaskList(data);
+  };
+
+  const completedCnt = taskList.filter(
+    task => task.isCompleted === true,
+  ).length;
+
+  const listCnt = taskList.length - completedCnt;
 
   return (
     <SafeAreaView style={Styles.main}>
@@ -84,12 +104,12 @@ export const Main = () => {
         <View style={Styles.wrapperInfo}>
           <View style={Styles.wrapperStatus}>
             <Text style={[Styles.info, Styles.created]}>남음</Text>
-            <Text style={Styles.counter}>1</Text>
+            <Text style={Styles.counter}>{listCnt}</Text>
           </View>
 
           <View style={Styles.wrapperStatus}>
             <Text style={[Styles.info, Styles.completed]}>완료</Text>
-            <Text style={Styles.counter}>2</Text>
+            <Text style={Styles.counter}>{completedCnt}</Text>
           </View>
         </View>
       </View>
@@ -117,8 +137,14 @@ export const Main = () => {
             <View style={Styles.containerTask}>
               <View style={Styles.taskWrapper}>
                 <BouncyCheckbox
+                  hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
                   fillColor="#5E60CE"
                   style={Styles.taskCheckBox}
+                  isChecked={item.isCompleted}
+                  disableBuiltInState
+                  onPress={() => {
+                    completedCheck(item.idx);
+                  }}
                 />
                 <Text
                   style={[
