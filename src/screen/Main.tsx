@@ -12,8 +12,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {Styles} from './Styles';
-import produce from 'immer';
-import {createIconSetFromFontello} from 'react-native-vector-icons';
+import Tts from 'react-native-tts';
 
 interface task {
   idx: number;
@@ -25,6 +24,9 @@ export const Main = () => {
   const [taskText, setTaskText] = useState<string>('');
   const [taskIdx, setTaskIdx] = useState(0);
   const [taskList, setTaskList] = useState<task[]>([]);
+
+  Tts.setDefaultLanguage('ko-KR');
+  Tts.setDefaultVoice('ko-kr-x-ism-local');
 
   const addTaskButton = () => {
     if (!taskText) {
@@ -146,6 +148,15 @@ export const Main = () => {
                   ]}>
                   {item.text}
                 </Text>
+                <TouchableOpacity
+                  hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
+                  style={Styles.taskSound}
+                  onPress={() => {
+                    Tts.stop();
+                    Tts.speak(item.text);
+                  }}>
+                  <Icon name="headphones" size={20} color="#808080" />
+                </TouchableOpacity>
                 <TouchableOpacity
                   hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
                   style={Styles.taskButton}
