@@ -43,14 +43,7 @@ export const Main = () => {
   };
 
   const removeTaskButton = (idx: number) => {
-    let data: task[] = [];
-    taskList.map(task => {
-      if (task.idx !== idx) {
-        data.push(task);
-      }
-    });
-
-    setTaskList(data);
+    setTaskList(taskList.filter(task => task.idx !== idx));
   };
 
   const completedCheck = (idx: number) => {
@@ -151,9 +144,10 @@ export const Main = () => {
                     Styles.taskText,
                     item.isCompleted && Styles.taskCompletedText,
                   ]}>
-                  {item.idx} {item.text}
+                  {item.text}
                 </Text>
                 <TouchableOpacity
+                  hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
                   style={Styles.taskButton}
                   onPress={() => {
                     removeTaskButton(item.idx);
