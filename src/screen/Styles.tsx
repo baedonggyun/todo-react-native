@@ -115,9 +115,13 @@ export const Styles = StyleSheet.create({
     borderRadius: 8,
   },
   taskCheckBox: {},
+  textbox: {
+    width: 180,
+    flexDirection: 'row',
+    flex: 1,
+  },
   taskText: {
     color: '#F2F2F2',
-    width: 180,
     marginLeft: 8,
     marginRight: 18,
     fontFamily: 'Inter',
@@ -127,6 +131,6 @@ export const Styles = StyleSheet.create({
   },
   taskCompletedText: {textDecorationLine: 'line-through', color: '#808080'},
   taskSound: {width: 30},
-  taskButton: {},
+  taskButton: {marginRight: 10},
   taskIcon: {},
 });

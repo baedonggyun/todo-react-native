@@ -141,22 +141,24 @@ export const Main = () => {
                     completedCheck(item.idx);
                   }}
                 />
-                <Text
-                  style={[
-                    Styles.taskText,
-                    item.isCompleted && Styles.taskCompletedText,
-                  ]}>
-                  {item.text}
-                </Text>
-                <TouchableOpacity
-                  hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
-                  style={Styles.taskSound}
-                  onPress={() => {
-                    Tts.stop();
-                    Tts.speak(item.text);
-                  }}>
-                  <Icon name="headphones" size={20} color="#808080" />
-                </TouchableOpacity>
+                <View style={Styles.textbox}>
+                  <Text
+                    style={[
+                      Styles.taskText,
+                      item.isCompleted && Styles.taskCompletedText,
+                    ]}>
+                    {item.text}
+                  </Text>
+                  <TouchableOpacity
+                    hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
+                    style={Styles.taskSound}
+                    onPress={() => {
+                      Tts.stop();
+                      Tts.speak(item.text);
+                    }}>
+                    <Icon name="headphones" size={20} color="#808080" />
+                  </TouchableOpacity>
+                </View>
                 <TouchableOpacity
                   hitSlop={{top: 10, left: 10, bottom: 10, right: 10}}
                   style={Styles.taskButton}
