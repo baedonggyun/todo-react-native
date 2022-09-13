@@ -73,6 +73,8 @@ export const Main = () => {
       </View>
       <View style={Styles.addTaskContainer}>
         <TextInput
+          onSubmitEditing={addTaskButton}
+          returnKeyType="done"
           style={Styles.input}
           placeholder="todo"
           placeholderTextColor="#555"
