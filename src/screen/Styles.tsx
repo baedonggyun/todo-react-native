@@ -25,10 +25,14 @@ export const Styles = StyleSheet.create({
   containerEmpty: {
     alignItems: 'center',
     marginTop: 20,
+    height: 300,
   },
   containerTask: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  listTask: {
+    flex: 1,
   },
   header: {
     backgroundColor: '#0D0D0D',

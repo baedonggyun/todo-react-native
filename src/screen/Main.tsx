@@ -111,7 +111,7 @@ export const Main = () => {
         </View>
       </View>
 
-      <View style={Styles.containerTask}>
+      <View style={Styles.listTask}>
         <FlatList
           data={taskList}
           ListEmptyComponent={() => (
@@ -124,9 +124,6 @@ export const Main = () => {
                 <Text style={[Styles.emptyText, Styles.emptyTitle]}>
                   리스트
                 </Text>
-                {/* <Text style={[Styles.emptyText, Styles.emptySubTitle]}>
-                  Crie tarefas e organize seus itens a fazer
-                </Text> */}
               </View>
             </View>
           )}
@@ -178,6 +175,9 @@ export const Main = () => {
             </View>
           )}
         />
+      </View>
+      <View style={Styles.remot}>
+        <Text style={[Styles.info, Styles.created]}>선택 삭제</Text>
       </View>
     </SafeAreaView>
   );
