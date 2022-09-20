@@ -49,6 +49,10 @@ export const Main = () => {
     setTaskList(taskList.filter(task => task.idx !== idx));
   };
 
+  const removeAllTaskButton = () => {
+    setTaskList(taskList.filter(task => task.isCompleted === false));
+  };
+
   const completedCheck = (idx: number) => {
     let data: task[] = [];
 
@@ -183,9 +187,16 @@ export const Main = () => {
         />
       </View>
       {visible ? (
-        <View style={Styles.removeButton}>
-          <Text style={[Styles.info, Styles.removeButtonText]}>선택 삭제</Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => {
+            removeAllTaskButton();
+          }}>
+          <View style={Styles.removeButton}>
+            <Text style={[Styles.info, Styles.removeButtonText]}>
+              선택 삭제
+            </Text>
+          </View>
+        </TouchableOpacity>
       ) : null}
     </SafeAreaView>
   );
