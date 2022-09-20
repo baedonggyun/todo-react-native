@@ -137,4 +137,10 @@ export const Styles = StyleSheet.create({
   taskSound: {width: 30},
   taskButton: {marginRight: 10},
   taskIcon: {},
+  removeButton: {
+    width: '100%',
+    padding: 20,
+    backgroundColor: '#4EA8DE',
+  },
+  removeButtonText: {textAlign: 'center', color: '#FFFFFF'},
 });

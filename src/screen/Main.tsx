@@ -24,6 +24,7 @@ export const Main = () => {
   const [taskText, setTaskText] = useState<string>('');
   const [taskIdx, setTaskIdx] = useState(0);
   const [taskList, setTaskList] = useState<task[]>([]);
+  const [visible, setVisible] = useState(false);
 
   Tts.setDefaultLanguage('ko-KR');
   Tts.setDefaultVoice('ko-kr-x-ism-local');
@@ -50,12 +51,20 @@ export const Main = () => {
 
   const completedCheck = (idx: number) => {
     let data: task[] = [];
+    setVisible(false);
+
     taskList.map(task => {
       if (task.idx === idx) {
         task.isCompleted = !task.isCompleted;
+        if (task.isCompleted === true) {
+          console.log(task.isCompleted);
+          setVisible(true);
+        }
       }
       data.push(task);
     });
+
+    console.log(visible);
 
     setTaskList(data);
   };
@@ -176,8 +185,8 @@ export const Main = () => {
           )}
         />
       </View>
-      <View style={Styles.remot}>
-        <Text style={[Styles.info, Styles.created]}>선택 삭제</Text>
+      <View style={Styles.removeButton}>
+        <Text style={[Styles.info, Styles.removeButtonText]}>선택 삭제</Text>
       </View>
     </SafeAreaView>
   );
