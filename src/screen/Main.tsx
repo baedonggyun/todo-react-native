@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Alert,
   FlatList,
@@ -51,25 +51,22 @@ export const Main = () => {
 
   const completedCheck = (idx: number) => {
     let data: task[] = [];
-    setVisible(false);
 
+    setVisible(false);
     taskList.map(task => {
       if (task.idx === idx) {
         task.isCompleted = !task.isCompleted;
-        if (task.isCompleted === true) {
-          console.log(task.isCompleted);
-          setVisible(true);
-        }
+      }
+      if (task.isCompleted === true) {
+        setVisible(true);
       }
       data.push(task);
     });
 
-    console.log(visible);
-
     setTaskList(data);
   };
 
-  const completedCnt = taskList.filter(
+  const completedCnt: number = taskList.filter(
     task => task.isCompleted === true,
   ).length;
 
@@ -185,9 +182,11 @@ export const Main = () => {
           )}
         />
       </View>
-      <View style={Styles.removeButton}>
-        <Text style={[Styles.info, Styles.removeButtonText]}>선택 삭제</Text>
-      </View>
+      {visible ? (
+        <View style={Styles.removeButton}>
+          <Text style={[Styles.info, Styles.removeButtonText]}>선택 삭제</Text>
+        </View>
+      ) : null}
     </SafeAreaView>
   );
 };
