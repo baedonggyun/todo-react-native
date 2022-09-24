@@ -13,6 +13,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import {Styles} from './Styles';
 import Tts from 'react-native-tts';
+import Header from '../components/header';
 
 interface task {
   idx: number;
@@ -78,9 +79,7 @@ export const Main = () => {
 
   return (
     <SafeAreaView style={Styles.main}>
-      <View style={Styles.header}>
-        <Image source={require('../assets/logo.png')} />
-      </View>
+      <Header />
       <View style={Styles.addTaskContainer}>
         <TextInput
           onSubmitEditing={addTaskButton}
@@ -186,7 +185,7 @@ export const Main = () => {
           )}
         />
       </View>
-      {visible ? (
+      {visible && (
         <TouchableOpacity
           onPress={() => {
             removeAllTaskButton();
@@ -197,7 +196,7 @@ export const Main = () => {
             </Text>
           </View>
         </TouchableOpacity>
-      ) : null}
+      )}
     </SafeAreaView>
   );
 };

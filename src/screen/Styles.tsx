@@ -67,8 +67,6 @@ export const Styles = StyleSheet.create({
     position: 'relative',
     justifyContent: 'center',
     alignItems: 'center',
-    // width: 20,
-    // height: 20,
   },
   addTaskButtonIcon: {position: 'absolute', zIndex: 99, border: 'none'},
   wrapperStatus: {flexDirection: 'row'},
